@@ -7,6 +7,7 @@
         <module>project-a</module>
         <module>project-b</module>
         <module>redlock</module>
+        <module>demo</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>

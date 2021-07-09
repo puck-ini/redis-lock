@@ -6,6 +6,8 @@ import org.redisson.api.RLock;
 import org.redisson.api.RedissonClient;
 import org.redisson.config.Config;
 
+import java.util.Arrays;
+import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -48,14 +50,15 @@ public class RedLockTest {
             // 不设置锁失效时间则该锁为重入锁，默认失效时间为30s, 同时锁重入时设置的默认失效时间为30s
             // 将阻塞时间设置长才可以在别的客户端释放锁是申请到锁
 //            isLock = redLock.tryLock(500, 10000, TimeUnit.MILLISECONDS);
-            isLock = redLock.tryLock(60000,  TimeUnit.MILLISECONDS);
+            isLock = redLock.tryLock(80000,100000, TimeUnit.MILLISECONDS);
             if (isLock) {
                 // do something
-                for (int i = 0; i < 5; i++) {
-                    Thread.sleep(10000);
+                for (int i = 0; i < 1; i++) {
+                    Thread.sleep(9000);
                     System.out.println("test1");
                 }
             }
+//            isLock = redLock.tryLock(80000,100000, TimeUnit.MILLISECONDS);
             System.out.println("do end");
         } catch (Exception e) {
             e.printStackTrace();
@@ -69,5 +72,7 @@ public class RedLockTest {
 
     public static void main(String[] args) {
         test();
+
+//        System.out.println(UUID.randomUUID().toString());
     }
 }
